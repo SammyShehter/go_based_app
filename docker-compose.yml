@@ -7,7 +7,8 @@ services:
     volumes:
       - ".:/app"
     depends_on:
-      - "db"
+      - db
+      - redis
   db:
     image: mysql:5.7.22
     restart: always
@@ -19,4 +20,8 @@ services:
     volumes:
       - .dbdata:/var/lib/mysql
     ports:
-      - "33066:3306"
+      - 33066:3306
+  redis:
+    image: redis:latest
+    ports:
+      - 6379:6379

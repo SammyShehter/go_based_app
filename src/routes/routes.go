@@ -8,6 +8,7 @@ import (
 
 func Setup(app *fiber.App) {
 	api := app.Group("api")
+
 	admin := api.Group("admin")
 
 	admin.Post("register", controllers.Register)
@@ -26,4 +27,16 @@ func Setup(app *fiber.App) {
 	adminAuthenticated.Put("products/:id", controllers.UpdateProduct)
 	adminAuthenticated.Delete("products/:id", controllers.DeleteProduct)
 	adminAuthenticated.Get("orders", controllers.Orders)
+
+	ambassador := api.Group("ambassador")
+
+	ambassador.Post("register", controllers.Register)
+	ambassador.Post("login", controllers.Login)
+
+	ambassadorAuthenticated := ambassador.Use(middlewares.IsAuthenticated)
+	ambassadorAuthenticated.Get("user", controllers.User)
+	ambassadorAuthenticated.Post("logout", controllers.Logout)
+	ambassadorAuthenticated.Put("users/info", controllers.UpdateInfo)
+	ambassadorAuthenticated.Put("users/password", controllers.UpdatePassword)
+
 }

@@ -15,7 +15,7 @@ type Order struct {
 	Country         string      `json:"country"`
 	Zip             string      `json:"zip"`
 	Complete        bool        `json:"-" gorm:"default:false"`
-	Total           float64      `json:"total" gorm:"-"`
+	Total           float64     `json:"total" gorm:"-"`
 	OrderItems      []OrderItem `json:"order_items" gorm:"foreignKey:OrderId"`
 }
 
@@ -23,10 +23,10 @@ type OrderItem struct {
 	Model
 	OrderId           uint    `json:"order_id"`
 	ProductTitle      string  `json:"product_title"`
-	Price             float64  `json:"price"`
+	Price             float64 `json:"price"`
 	Quantity          uint    `json:"quantity"`
-	AdminRevenue      float64  `json:"admin_revenue"`
-	AmbassadorRevenue float64  `json:"ambassador_revenue"`
+	AdminRevenue      float64 `json:"admin_revenue"`
+	AmbassadorRevenue float64 `json:"ambassador_revenue"`
 }
 
 func (order *Order) FullName() string {
